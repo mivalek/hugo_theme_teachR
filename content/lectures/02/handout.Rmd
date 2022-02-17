@@ -1,0 +1,65 @@
+---
+title: "Fundamentals of statistical testing"
+author: "Milan Valášek"
+description: "In our first lecture, we will go over some of the basic statistical concepts, adding to our knowledge of distributions and sampling. We will discuss the essential properties of the normal distribution and how we can use them to make inferences from samples to populations. Finally, we will talk about a core principle of statistical testing, the **Central Limit Theorem**."
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = F, panel=FALSE, copy=TRUE, dev.args = list(bg = 'transparent')) 
+options(scipen=999)
+
+set.seed(420)
+library(tidyverse)
+library(cowplot)
+```
+
+:::{.box}
+## Objectives
+
+The aim of this lecture is to help you understand
+
+- that there exist mathematical functions that describe different distributions
+
+- what makes the normal distribution normal and what are its properties
+
+- how random fluctuations affect sampling and parameter estimates
+
+- the function of the sampling distribution and the standard error
+
+- the Central Limit Theorem
+
+**With this knowledge you'll build a solid foundation for understanding all the statistics we will be learning in this programme!**
+
+### It's all Greek to me!
+
+Before we start, let's make clear an important distinction between sample statistics, population parameters, and parameter estimates.
+
+What we really want when we're analysing data using statistical methods is to know the value of the _population parameter(s) of interest_. This could be the population mean, or the difference between two populations. The problem is that we can't directly measure these parameters because it's not possible to observe the entire population.
+
+What we do instead is collect a sample and observe the _sample statistic_, such as the sample mean. We then use this sample statistic as an _estimate_ -- the best guess – of the value of the population parameter.
+
+To make this distinction clear in notation, we use Greek letters for population parameters, Latin letters for sample statistics, and letters with a hat for population estimates:
+
+- $\mu$ is the _population_ mean
+- $\hat{x}$ is the _sample_ mean
+- $\hat{\mu}$ is the **estimate** of the _population_ mean
+
+Same goes for, for example, the standard deviation: $\sigma$
+is the population parameter, $s$ is the sample statistic, and $\hat{\sigma}$ is the parameter estimate.
+
+:::
+
+
+## Distributions again
+
+Let's briefly revisit the general topic of distributions.
+Numerically speaking, a distribution is _the number of observations per each value of a variable_.
+We could ask our sample whether they like cats, dogs, both, or neither and the resulting numbers would be the distribution of the "pet person" variable (or some other name).
+
+Inspecting a variable's distribution gives information about which values occur more often and which less often.
+
+We can visualise a distribution as _the shape formed by the bars of a bar chart/histogram_.
+
+```{r lec01-fig01, panel=TRUE, fig.cap="Basic histogram"}
+hist(rnorm(1000))
+```
