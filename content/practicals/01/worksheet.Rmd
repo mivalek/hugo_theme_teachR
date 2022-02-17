@@ -28,7 +28,7 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r pressure, panel=TRUE}
+```{r, panel=TRUE}
 plot(pressure)
 ```
 

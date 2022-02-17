@@ -60,7 +60,7 @@ Inspecting a variable's distribution gives information about which values occur 
 
 We can visualise a distribution as _the shape formed by the bars of a bar chart/histogram_.
 
-```{r lec01-fig01, panel=TRUE, fig.cap="Visualising distributions using a bar chart for a discrete variable (eye colour) and a histogram for a continuous variable (age)"}
+```{r, panel=TRUE, fig.cap="Visualising distributions using a bar chart for a discrete variable (eye colour) and a histogram for a continuous variable (age)"}
 df <- tibble(eye_col = sample(c("Brown", "Blue", "Green", "Gray"), 555,
                         replace = T, prob = c(.55, .39, .04, .02)),
              age = rnorm(length(eye_col), 20, .65))

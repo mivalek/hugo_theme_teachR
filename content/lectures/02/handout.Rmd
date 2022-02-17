@@ -60,6 +60,6 @@ Inspecting a variable's distribution gives information about which values occur 
 
 We can visualise a distribution as _the shape formed by the bars of a bar chart/histogram_.
 
-```{r lec01-fig01, panel=TRUE, fig.cap="Basic histogram"}
+```{r, panel=TRUE, fig.cap="Basic histogram"}
 hist(rnorm(1000))
 ```
