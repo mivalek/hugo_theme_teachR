@@ -1,0 +1,140 @@
+---
+title: "Fundamentals of statistical testing"
+author: "Milan Valášek"
+description: "In our first lecture, we will go over some of the basic statistical concepts, adding to our knowledge of distributions and sampling. We will discuss the essential properties of the normal distribution and how we can use them to make inferences from samples to populations. Finally, we will talk about a core principle of statistical testing, the **Central Limit Theorem**."
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = F, panel=FALSE, copy=TRUE, dev.args = list(bg = 'transparent')) 
+options(scipen=999)
+
+set.seed(420)
+library(tidyverse)
+library(cowplot)
+```
+
+:::{.box}
+## Objectives
+
+The aim of this lecture is to help you understand
+
+- that there exist mathematical functions that describe different distributions
+
+- what makes the normal distribution normal and what are its properties
+
+- how random fluctuations affect sampling and parameter estimates
+
+- the function of the sampling distribution and the standard error
+
+- the Central Limit Theorem
+
+**With this knowledge you'll build a solid foundation for understanding all the statistics we will be learning in this programme!**
+
+### It's all Greek to me!
+
+Before we start, let's make clear an important distinction between sample statistics, population parameters, and parameter estimates.
+
+What we really want when we're analysing data using statistical methods is to know the value of the _population parameter(s) of interest_. This could be the population mean, or the difference between two populations. The problem is that we can't directly measure these parameters because it's not possible to observe the entire population.
+
+What we do instead is collect a sample and observe the _sample statistic_, such as the sample mean. We then use this sample statistic as an _estimate_ -- the best guess – of the value of the population parameter.
+
+To make this distinction clear in notation, we use Greek letters for population parameters, Latin letters for sample statistics, and letters with a hat for population estimates:
+
+- $\mu$ is the _population_ mean
+- $\hat{x}$ is the _sample_ mean
+- $\hat{\mu}$ is the **estimate** of the _population_ mean
+
+Same goes for, for example, the standard deviation: $\sigma$
+is the population parameter, $s$ is the sample statistic, and $\hat{\sigma}$ is the parameter estimate.
+
+:::
+
+
+## Distributions again
+
+Let's briefly revisit the general topic of distributions.
+Numerically speaking, a distribution is _the number of observations per each value of a variable_.
+We could ask our sample whether they like cats, dogs, both, or neither and the resulting numbers would be the distribution of the "pet person" variable (or some other name).
+
+Inspecting a variable's distribution gives information about which values occur more often and which less often.
+
+We can visualise a distribution as _the shape formed by the bars of a bar chart/histogram_.
+
+```{r lec01-fig01, panel=TRUE, fig.cap="Visualising distributions using a bar chart for a discrete variable (eye colour) and a histogram for a continuous variable (age)"}
+df <- tibble(eye_col = sample(c("Brown", "Blue", "Green", "Gray"), 555,
+                        replace = T, prob = c(.55, .39, .04, .02)),
+             age = rnorm(length(eye_col), 20, .65))
+
+p1 <- df %>%
+  ggplot(aes(x = eye_col)) +
+  geom_bar(fill = c("skyblue4", "chocolate4", "slategray", "olivedrab"), colour=NA) +
+  labs(x = "Eye colour", y = "Count")
+
+p2 <- df %>%
+  ggplot(aes(x = age)) +
+  geom_histogram() +
+  stat_density(aes(y = ..density.. * 80), geom = "line", color = theme_col, lwd = 1) +
+  labs(x = "Age (years)", y = "Count")
+  
+plot_grid(p1, p2)
+```
+
+<aside>
+### Plot panels
+
+Most plots in these handouts are presented in this kind of panel form.
+If you're interested in the code that created these plots, you can just click on the "`R` code" tab.
+The code for the plots in this lecture is rather advanced (and sometimes VERY messy!) so don't worry about it too much.
+However, if you really want to know how to create these kinds of plots, having the code to experiment with is very useful!
+</aside>
+
+
+:::{.r-box}
+Here's how we can code this simulation:
+- we draw 20 observation form the population using `rnorm()`
+- we calculate the mean of this sample with `mean()`
+- we repeat this procedure 100,000 times using `replicate()` saving all the means of all the samples in an object called `x_bar`.
+
+```{r}
+n <- 20
+mu <- 173
+sigma <- 23
+x_bar <- replicate(100000, mean(rnorm(n, mu, sigma)))
+mean(x_bar)
+```
+:::
+
+
+:::{.box}
+## Take-home message
+
+- _Distribution_ is the number of observations per each value of a variable
+- There are many mathematically well-described distributions
+  - Normal (Gaussian) distribution is one of them
+- Each has a formula allowing the calculation of the probability of drawing an arbitrary range of values
+
+- Normal distribution is
+  - **continuous**
+  - **unimodal**
+  - **symmetrical**
+  - **bell-shaped**
+  - _it's the right proportions that make a distribution normal!_
+- In a normal distribution it is true that
+  - **∼68.2%** of the data is within **&pm;1 _SD_** from the mean
+  - **∼95.4%** of the data is within **&pm;2 _SD_** from the mean
+  - **∼99.7%** of the data is within **&pm;3 _SD_** from the mean
+- Every known distribution has its own critical values
+
+- Statistics of random samples differ from parameters of a population
+- Distribution of sample parameters is the **sampling distribution**
+- **Standard error** of a parameter estimate is the _SD_ of its sampling distribution
+  - Provides_ margin of error_ for estimated parameter
+  - The larger the sample, the less the estimate varies from sample to sample
+
+- **Central Limit Theorem**
+  - Really important!
+  - With increasing sample size, the sampling distribution of the mean tends to -- or approximates -- normal **even if population distribution is not normal**
+
+Understanding distributions, sampling distributions, standard errors, and CLT it **most of what you need** to understand all the stats techniques we will cover.
+
+:::

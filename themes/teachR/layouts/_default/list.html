@@ -1,0 +1,94 @@
+{{ define "body" }}
+<div id="paralax-div"></div>
+<d-title>
+  {{ with .Content }}
+    {{ with $.Title }}
+    <h1>{{ . }}</h1>
+    {{ end }}
+    {{ . }}
+  {{ end }}
+</d-title>
+<d-article>
+<div class="lecture-list">
+    {{ $path := printf "/content/%s" .File.Dir}}
+    {{ range (readDir $path) }}
+      {{ if .IsDir }}
+      
+      <div class="lecture" type="{{ $.Section | singularize }}">
+      {{ $lectureNo := replaceRE "^0" "" .Name }}
+      <h3 id="{{ .Name }}">{{ $.Section | singularize | humanize }} {{ $lectureNo }}</h4>
+      {{ $path := slice (printf "%s\\%s\\" $.Type .Name) (printf "%s/%s/" $.Type .Name)}}
+      {{ $isDesc := false }}
+        {{ range $index, $value := where $.RegularPages "File.Dir" "in" $path }}
+          {{ if (eq $index 0) }}
+            <h2>{{ .Title | safeHTML | markdownify }}</h2>
+          {{ end }}
+          {{ if and ( isset .Page.Params "description" ) ( eq $isDesc false ) }}
+            <p>{{ .Page.Params.description | safeHTML | markdownify }}</p>
+            {{ $isDesc = true}}
+          {{ end }}
+        {{ end }}
+        <div class="tiles">
+        {{ range $index, $value := (where $.RegularPages "File.Dir" "in" $path).Reverse }}
+          {{ $class := "" }}
+          {{ if ( isset .Page.Params "publish" ) }}
+            {{ if (not .Page.Params.publish) }}
+              {{ $class = "disabled"}}
+            {{ end }}  
+          {{ end }}
+          {{ $noSol := false }}
+          {{ if ( isset .Page.Params "no_solution" ) }}
+            {{ if .Page.Params.no_solution }}
+              {{ $noSol = true }}
+            {{ end }}
+          {{ end }}
+          {{ $title := cond ( in $value "lecture" ) "slides" "intro slides" }}
+          {{ $alt := cond ( in $value "lecture" ) "lecture slides" "introductory slides" }}
+          {{ $icon := "far fa-images" }}
+          {{ if not (eq .File.ContentBaseName "slides") }}
+            {{ $title = cond ( in $value "lecture" ) "handout" "worksheet" }}
+            {{ $alt = cond ( in $value "lecture" ) "lecture handout" "practical worksheet" }}
+            {{ $icon = "far fa-file-alt" }}
+          {{ end }}
+          
+          {{ if isset .Page.Params "recording" }}
+            <div class="tile">
+              <a rec-id="{{ .Page.Params.recording }}" class="recording" title="recording" alt="recording"><i class="fab fa-youtube"></i></a>
+            </div>
+          {{ end }}
+          <div class="tile {{ $class }}">
+            <a href="{{ .RelPermalink }}" title="{{ $title }}" alt="{{ $alt }}" {{ if $noSol }}class="no-solution"{{ end }}>
+              <i class="{{ $icon }}"></i>
+            </a>
+          </div>
+        {{ end }}
+        </div>
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+  
+
+</d-article>
+{{ end }}
+
+
+{{ define "css" }}
+
+  {{ partial "css" . }}
+  
+  <link rel="stylesheet" href="/css/list_page.css">
+{{ end }}
+
+
+{{ define "scripts" }}
+ 
+   {{ partial "scripts" . }}
+{{ end }}
+
+
+
+{{ define "footer" }}
+
+  {{ partial "distill/footer" . }}
+{{ end }}

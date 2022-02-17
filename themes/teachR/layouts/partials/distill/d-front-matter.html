@@ -1,0 +1,28 @@
+<d-front-matter>
+  <script type="text/json">{
+    "title": "{{ .Title | safeHTML }}",
+    "description": "{{ .Params.Description }}",
+    "published": {{ if isset .Params "Date" }}"{{ dateFormat "2 Jan, 2006" .Date }}"{{ else }}"{{ now.Format "2 Jan, 2006" }}"{{ end }},
+    "authors": [
+      {{ if eq (printf "%T" .Params.Author) "[]string" }}
+      {{- range $ax, $author := .Params.Author }}
+        {
+          "author": "{{ $author  | safeHTML }}"
+        }{{ if (lt $ax (len (slice $.Params.Author))) }},{{ end }}
+      {{- end -}}
+      {{ else }}
+        {
+          "author": "{{ .Params.Author | safeHTML }}"
+        }
+      {{ end }}
+    ],
+    "katex": {
+      "delimiters": [
+        {"left": "$$", "right": "$$", "display": true},
+        {"left": "$", "right": "$", "display": false},
+        {"left": "\\(", "right": "\\)", "display": false},
+        {"left": "\\[", "right": "\\]", "display": true}
+      ]
+    }
+  }</script>
+</d-front-matter>

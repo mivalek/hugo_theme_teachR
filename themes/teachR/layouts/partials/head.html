@@ -1,0 +1,83 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{{ .Permalink }}" />
+{{ hugo.Generator }}
+
+<meta name="application-name" content="{{ .Site.Title | safeHTML | plainify }}">
+<meta name="theme-color" content="{{ .Site.Params.color }}">
+<meta name="msapplication-navbutton-color" content="{{ .Site.Params.color }}">
+
+{{- if .Description -}}
+  <meta name="description" content="{{ .Description | safeHTML }}" />
+{{ else if .Site.Params.Description }}
+  <meta name="description" content="{{ .Site.Params.description | safeHTML }}" />
+{{- end -}}
+
+{{- if .Keywords -}}
+  <meta name="keywords" content='{{ delimit .Keywords "," }}' />
+{{ else if .Site.Params.Keywords }}
+  <meta name="keywords" content='{{ delimit .Site.Params.Keywords "," }}' />
+{{- end -}}
+
+{{- if .Author -}}
+  <meta name="author" content='{{ .Author }}' />
+{{ else if .Authors }}
+  <meta name="author" content='{{ delimit .Authors "," }}' />
+{{- end -}}
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/favicon.ico">
+<link rel="mask-icon" href="/favicon.ico">
+
+<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<title>{{ replace (.Title | safeHTML | plainify ) "&nbsp;" " "}}</title>
+
+<!-- See https://github.com/gohugoio/hugo/tree/master/tpl/tplimpl/embedded/templates -->
+{{- template "_internal/disqus.html" . -}}
+{{- template "_internal/google_analytics_async.html" . -}}
+{{- template "_internal/opengraph.html" . -}}
+{{- template "_internal/schema.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+{{ partial "head_highlightjs" . }}
+<link id="theme" rel="stylesheet" href="" media="all">
+<style type="text/css">
+  :root {
+    {{ range $key, $value := .Site.Params.colours }}
+    --{{ $key }}: {{ $value | safeHTML }};
+    {{ end }}
+    {{ with .Site.Params.bg_image }}
+    --bg-image: url({{.}})
+    {{ end }}
+  }
+</style>
+<script type="text/javascript">
+  if (localStorage.getItem("darkTheme")) {
+    if (localStorage.getItem("darkTheme") === "true") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  } else if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("darkTheme", "true")
+  }
+</script>
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+{{ range .Site.Params.customCSS }}
+<link rel="stylesheet" href="{{ . | relURL }}">
+{{ end }}
+
+{{ with .Site.Params.notice_board}}
+  <script id="notice-board-data" type="text/json">{{ . | jsonify }}</script>
+{{ end }}
+{{ partial "head_custom" . }}
+

@@ -1,0 +1,19 @@
+<dt-footer class="footer">
+        <div class="institution">
+        <a href="{{ .Site.Params.institution_logo.target }}" class="institution-logo" target="_blank" aria-label="{{ .Site.Params.institution_logo.alt }}">
+          <svg>
+            <use xlink:href="{{ print "images/" .Site.Params.institution_logo.url | relURL }}#content"></use>
+          </svg>
+        </a>
+        </div>
+        <ul class="footer-links">
+          <li>
+            &copy; {{ now.Year }} {{ .Site.Author.name }}
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="{{ "images/hugo_logo.svg" | relURL }}" alt="Img link to Hugo website" width="70" height="22"></a>
+          </li>
+          <li><a href="https://github.com/mivalek/" class="footer-links-kudos" target="_blank">Theme <code>teachR</code> on <img id="gh" src="{{ "images/github.svg" | relURL }}" alt="link to GitHub repository" width="18" height="18"></li></a>
+        </ul>
+</dt-footer>
+

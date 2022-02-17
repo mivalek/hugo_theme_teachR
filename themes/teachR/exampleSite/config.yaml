@@ -1,0 +1,72 @@
+baseurl: /
+languageCode: en-us
+author:
+  name: Milan Valášek
+title: Example Module Website
+theme: teachR
+googleAnalytics: ''
+disqusShortname: ''
+ignoreFiles:
+  - \.Rmd$
+  - \.Rmarkdown$
+  - _cache$
+  - \.knit\.md$
+  - \.utf8\.md$
+relativeURLS: false
+permalinks:
+  post: /:year/:month/:day/:slug/
+menu:
+  main:
+    - identifier: Lectures
+      weight: 1
+      url: /skills_lab/
+    - identifier: Practicals
+      weight: 2
+params:
+  MathJaxCDN: https://cdnjs.cloudflare.com/ajax/libs
+  MathJaxVersion: 2.7.5
+  description: Welcome to Module Website | Programme @ Institution
+  favicon: favicon.ico
+  highlightjsCDN: https://cdnjs.cloudflare.com/ajax/libs
+  highlightjsLang:
+    - r
+    - yaml
+  highlightjsTheme: github
+  highlightjsVersion: 9.12.0
+  module_logo:
+    alt: Module Logo
+    height: 35
+    url: module_logo.svg
+    width: 35
+  institution_logo:
+    alt: link to institutional page
+    height: 80
+    url: inst_logo.svg
+    width: 80
+    target: ""
+  vle_logo:
+    title: Go to virtual learning environment
+    alt: VLE Logo
+    height: 30
+    url: vle.svg
+    width: 30
+    target: ""
+  slide_logo:
+    lec: "module_logo_lec.svg"
+    prac: "module_logo_prac.svg"
+  colours:
+    main-col: "#52006f"
+    main-col-rgb: "82, 0, 111"
+    second-col: "#009fa7"
+    second-col-rgb: "0, 159, 167"
+  bg_image: "/images/hex_mosaic.png"
+  notice_board:
+    show: false
+renders:
+  default: "teachR::html_page"
+  slides: "teachR::xaringan_slides"
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      unsafe: true

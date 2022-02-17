@@ -1,0 +1,50 @@
+{{ define "body" }}
+
+{{ partial "distill/d-front-matter" . }}
+
+{{ partial "distill/d-title" . }}
+
+{{ partial "distill/d-article" . }}
+
+{{ partial "distill/d-appendix" . }}
+
+{{ end }}
+
+
+{{ define "css" }}
+  <link rel="stylesheet" href="/css/panelset.css">
+  
+  {{ partial "css" . }}
+    
+  <link rel="stylesheet" href="/css/sheet.css">
+
+{{ end }}
+
+
+{{ define "scripts" }}
+  {{ partial "scripts" . }}
+{{ end }}
+
+
+{{ define "footer" }}
+
+  
+  {{ partial "distill/footer" . }}
+  <script type="text/javascript">
+    const section = {{ .Section }}
+  </script>
+  <script src="/js/sheet.js"></script>
+  <script type="text/javascript">
+  // needs to run after panelset.js
+  plotsToPanels()
+  addCopyButtons();
+  </script>
+  <script src="/js/panelset.js"></script>
+  {{ if isset .Page.Params "after_script" }}
+    {{ $scripts := slice }}
+    {{ $scripts = append .Page.Params.after_script $scripts }}
+    {{ range $scripts }}
+    <script src="{{ . }}" type="text/javascript"></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,113 @@
+---
+title: "Distributions and Data Wrangling - Practice"
+author: "Milan Valášek and Jennifer Mankin"
+date: "`r Sys.Date()`"
+description: "Complete this worksheet before or during your practical session in the same week. You will need the results to complete the worksheet quiz that we will do in the second half of the practical session."
+publish: true
+no_solution: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, panel=FALSE, warn = FALSE, message = FALSE)
+
+library(tidyverse)
+library(cowplot)
+
+gensex <- readr::read_csv("https://and.netlify.app/datasets/gensex_2022.csv")
+```
+
+## Slides
+
+You can find the [slides from the Week 1 practical session here](https://and.netlify.app/docs/prac_01_slides.html), but you do not need them to complete this worksheet.
+
+## Setting Up
+
+`r task()` Open your project for this week in RStudio. Then, open a new Markdown file with HTML output and save it in the `r_docs` folder. (Give it a sensible name, like `worksheet_01` or similar!) 
+
+For each of the tasks in [Analysis](## Analysis), write your code to complete the task in a new code chunk.
+
+:::{.box}
+Remember, you can add new code chunks by:
+
+1. Using the RStudio toolbar: Click Code > Insert Chunk
+1. Using a keyboard shortcut: the default is Ctrl + Alt + I, but you can change this under Tools > Modify Keyboard Shortcuts...
+1. Typing it out: <code>&#96;&#96;&#96;</code>`{r}`, press Enter, then <code>&#96;&#96;&#96;</code> again. 
+1. Copy and pasting a code chunk you already have (but be careful of duplicated chunk names!)
+:::
+
+To prepare for the take-away paper, make sure you **knit** this document when you've finished the tasks.
+
+`r task()` Load the `tidyverse` package and read in the data in the `setup` code chunk.
+
+```{r, eval=F, copy = TRUE}
+library(tidyverse)
+gensex <- readr::read_csv("https://and.netlify.app/datasets/gensex_2022.csv")
+```
+
+`r task()`Review the Codebook at the link below, which has all the information you need about this dataset.
+
+[View the Codebook](https://and.netlify.app/docs/gensex_codebook.html)
+
+## Analyses
+
+You will need the **output** from all of the following tasks in order to complete the worksheet quiz. If you are having any trouble with this, or you aren't sure how to understand what the output means, ask for help in your practical!
+
+`r task()` Bring up the standard help documentation for the function `group_by()` from the `dplyr` package.
+
+:::{.hint}
+Use `?function_name` in the Console to bring up the help documentation in the Viewer.
+
+If you are having difficulty working in RStudio, you can also search for the help documentation online. Keywords might include `R`, the function name, and the package that that function exists in.
+:::
+
+```{r, sol = TRUE, eval = F}
+?group_by()
+```
+
+`r task()`Starting with the `gensex` data, do the following in a single pipeline.
+
+- Group by `gender`
+- Create a summary of the means and *sd*s of `gender_masc` and `gender_comfort`
+
+:::{.hint}
+Have a look at the example under "Basic Pipeline" in Tutorial 1!
+:::
+
+```{r, sol = TRUE}
+gensex %>%
+  dplyr::group_by(gender) %>%
+  dplyr::summarise(
+    mean_masc = mean(gender_masc),
+    sd_masc = sd(gender_masc),
+    mean_comf = mean(gender_comfort),
+    sd_comf = sd(gender_comfort)
+  )
+```
+
+`r task()`Starting with the `gensex` data, do the following in a single pipeline.
+
+- Create a new variable containing the *z*-score of `gender_fem`
+- Calculate the mean of this *z*-score for each group in the `gender` variable
+
+:::{.hint}
+Have a look at Task 10 in Tutorial 1!
+:::
+
+```{r, sol = TRUE}
+gensex %>%
+  dplyr::mutate(gender_fem_z = scale(gender_fem)) %>%
+  dplyr::group_by(gender) %>%
+  dplyr::summarise(mean_gender_fem_z = mean(gender_fem_z))
+```
+
+## Knit!
+
+`r task()`Knit your worksheet once you've finished. You should see all of your code and output in the HTML document that it produces. This HTML will be saved in the same folder as the RMarkdown you knitted it from.
+
+If you encounter a knitting error, ask for help in your practical!
+
+## Well done!
+
+Make sure you have the RMarkdown or knitted HTML on hand when you take the worksheet quiz - you will need your answers to the above tasks.
+
+Good luck!

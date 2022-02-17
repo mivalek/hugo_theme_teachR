@@ -1,0 +1,91 @@
+---
+title: "Fundamentals of Statistical&nbsp;Testing"
+description: "In our first lecture, we will go over some of the basic statistical concepts, adding to our knowledge of distributions and sampling. We will discuss the essential properties of the normal distribution and how we can use them to make inferences from samples to populations. Finally, we will talk about a core principle of statistical testing, the Central Limit Theorem."
+author: "Dr Milan Valášek"
+date: "24 January 2022"
+type: slides
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(cowplot)
+```
+
+## Overview
+
+- Recap on distributions
+
+- More about the normal distribution
+
+- Sampling
+
+- Sampling distribution
+
+- Standard error
+
+- Central Limit Theorem
+
+---
+
+## Objectives
+
+After this lecture you will understand
+
+- that there exist mathematical functions that describe different distributions
+
+- what makes the normal distribution normal and what are its properties
+
+- how random fluctuations affect sampling and parameter estimates
+
+- the function of the sampling distribution and the standard error
+
+- the Central Limit Theorem
+
+&nbsp;
+
+.center[**With this knowledge you'll build a solid foundation for understanding all the statistics we will be learning in this programme!**]
+
+
+---
+
+## It's all Greek to me!
+
+- $\mu$ is the *population* mean
+
+- $\bar{x}$ is the *sample* mean
+
+- $\hat{\mu}$ is the **estimate** of the *population* mean
+
+- Same with *SD*: $\sigma$, $s$, and $\hat{\sigma}$
+
+- Greek is for populations, Latin is for samples, hat is for population estimates
+
+---
+
+## Recap on distributions
+
+- Numerically speaking, the number of observations per each value of a variable
+- Which values occur more often and which less often
+- The shape formed by the bars of a bar chart/histogram
+
+
+```{r, panel=TRUE}
+df <- tibble(eye_col = sample(c("Brown", "Blue", "Green", "Gray"), 555,
+                        replace = T, prob = c(.55, .39, .04, .02)),
+             age = rnorm(length(eye_col), 20, .65))
+
+p1 <- df %>%
+  ggplot(aes(x = eye_col)) +
+  geom_bar(fill = c("skyblue4", "chocolate4", "slategray", "olivedrab"), colour=NA) +
+  labs(x = "Eye colour", y = "Count")
+
+p2 <- df %>%
+  ggplot(aes(x = age)) +
+  geom_histogram() +
+  stat_density(aes(y = ..density.. * 80), geom = "line", color = theme_col, lwd = 1) +
+  labs(x = "Age (years)", y = "Count")
+  
+plot_grid(p1, p2)
+```
+
+

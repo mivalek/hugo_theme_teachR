@@ -1,0 +1,46 @@
+{{ define "body" }}
+
+{{ partial "distill/d-front-matter" . }}
+
+<div id="paralax-div"></div>
+<d-title>
+<p>{{.Page.Params.subtitle}}</p>
+</d-title>
+
+<d-article>
+  {{ .Content }}
+</d-article>
+
+
+{{ end }}
+
+
+{{ define "css" }}
+  
+  {{ partial "css" . }}
+  <style>
+  d-byline {
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    min-height: 0;
+  }
+  </style>
+  <link rel="stylesheet" href="/css/about.css" type="text/css" />
+{{ end }}
+
+
+{{ define "scripts" }}
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  {{ partial "scripts" . }}
+{{ end }}
+
+
+{{ define "footer" }}
+
+  
+  {{ partial "distill/footer" . }}
+  <script>
+    $(document).ready(() => $("d-appendix").hide());
+  </script>
+{{ end }}

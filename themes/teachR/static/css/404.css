@@ -1,0 +1,92 @@
+d-article {
+  overflow: hidden;
+}
+
+#yet {
+	color: var(--second-col);
+	text-align: end;
+	margin-top: 40px;
+	padding-bottom: 8px;
+}
+
+.container404 {
+	min-height: 300px;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	margin-right: 4em;
+}
+
+.msg404 {
+  position: relative;
+	padding: 20px 60px;
+	background: var(--main-col);
+	border-radius: 20px;
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
+}
+
+.msg404 a {
+  border-color: var(--bg-col);
+  white-space: nowrap;
+}
+
+.msg404 a:hover {
+  color: var(--second-col);
+  border-color: var(--second-col);
+}
+
+#lolshrug, #shadow {
+	position: absolute;
+	-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-moz-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-ms-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-o-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	color: var(--bg-col);
+	padding: 3px;
+  transform: rotateZ(15deg);
+}
+
+#lolshrug {
+  font-size: 30px;
+  font-weight: 400;
+	background: var(--second-col);
+	height: 136px;
+	width: 120px;
+  bottom: -30px;
+  right: -70px;
+}
+
+#shadow {
+	height: 140px;
+	width: 123px;
+  background: var(--bg-col);
+  bottom: -29px;
+  right: -65px;
+}
+
+#lolshrug > p {
+    line-height: 136px;
+    margin: 0;
+    transform: rotateZ(-30deg);
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    right: 0;
+    bottom: 0;
+    width: max-content;
+    height: max-content;
+}
+
+
+d-byline, d-appendix {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .container404 {
+    margin-right: 0;
+  }
+}

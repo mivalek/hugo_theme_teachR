@@ -1,0 +1,89 @@
+{{ define "body" }}
+
+<d-front-matter>
+  <script type="text/json">{
+    "title": "{{ .Title }}",
+    "description": "{{ .Site.Params.Description }}",
+    "authors": []
+  }</script>
+  <script src="js/date-funs.js"></script>
+</d-front-matter>
+
+<div id="paralax-div"></div>
+<d-title>
+  <h1>{{ .Title }}</h1>
+  <p>{{ .Site.Params.Description }}</p>
+</d-title>
+<d-byline class="hidden"></d-byline>
+<d-article>
+  {{ with .Content }}
+      {{ . }}
+  {{ end }}
+  <div id="main-page-tiles">
+    <div class="tiles">
+    {{ range first 3 .Sections }}
+      {{if (.Params.icon)}}
+        {{ $icon := printf "icons/%s" .Params.icon}}
+          <div id="{{ .Title }}" class="hexagon"><p><a href="{{ .RelPermalink }}" class="card" title="{{ .Title }}" alt="{{ .Title }}"> {{ partial $icon }} </a></p></div>
+      {{ else }}
+          <div class="hexagon"><p><a href="{{ .RelPermalink }}" class="card text" title="{{ .Title }}" alt="{{ .Title }}"> {{ .Title }}</a></p></div>
+      {{ end }}
+    {{ end }}
+    </div>
+    {{ if gt ( len .Sections ) 3 }}
+      <div class="tiles hideable {{ if eq (len .Sections) 4 }}{{ "nudge" }}{{ end }}">
+      {{ range first 2 ( after 3 .Sections ) }}
+      {{if (.Params.icon)}}
+        {{ $icon := printf "icons/%s" .Params.icon}}
+          <div id="{{ .Title }}" class="hexagon"><p><a href="{{ .RelPermalink }}" class="card" title="{{ .Title }}" alt="{{ .Title }}"> {{ partial $icon }} </a></p></div>
+      {{ else }}
+          <div class="hexagon"><p><a href="{{ .RelPermalink }}" class="card text" title="{{ .Title }}" alt="{{ .Title }}"> {{ .Title }}</a></p></div>
+      {{ end }}
+      {{ end }}
+      </div>
+    {{ end }}
+    {{ if gt ( len .Sections ) 5 }}
+      <div class="tiles hideable">
+      {{ range first 1 ( after 5 .Sections ) }}
+      
+      {{if (.Params.icon)}}
+        {{ $icon := printf "icons/%s" .Params.icon}}
+          <div id="{{ .Title }}" class="hexagon"><p><a href="{{ .RelPermalink }}" class="card" title="{{ .Title }}" alt="{{ .Title }}"> {{ partial $icon }} </a></p></div>
+      {{ else }}
+          <div class="hexagon"><p><a href="{{ .RelPermalink }}" class="card text" title="{{ .Title }}" alt="{{ .Title }}"> {{ .Title }}</a></p></div>
+      {{ end }}
+      {{ end }}
+      </div>
+    {{ end }}
+    
+
+  </div>
+</d-article>
+
+{{ end }}
+
+
+{{ define "css" }}
+
+  {{ partial "css" . }}
+  
+  <link rel="stylesheet" href="css/home_page.css">
+{{ end }}
+
+
+{{ define "scripts" }}
+   
+   {{ partial "scripts" . }}
+
+{{ end }}
+
+
+
+{{ define "footer" }}
+
+  {{ partial "distill/footer" . }}
+  
+  <script type="text/javascript">
+    $(".hexagon:odd") .addClass("alt")
+  </script>
+{{ end }}

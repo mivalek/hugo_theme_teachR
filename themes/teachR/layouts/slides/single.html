@@ -1,0 +1,74 @@
+
+{{ define "scripts" }}
+
+  <script src="/slides-libs/header-attrs/header-attrs.js"></script>
+  <script src="/slides-libs/panelset/panelset.js"></script>
+  <script src="/slides-libs/kePrint/kePrint.js"></script>
+{{ end }}
+
+{{ define "css" }}
+  <style>
+    :root {
+      {{ if in .Dir "lectures" }}
+      --primary: var(--main-col);
+      --secondary: var(--second-col);
+      {{ else }}
+      --primary: var(--second-col);
+      --secondary: var(--main-col);
+      {{ end }}
+    }
+  </style>
+  <link href="/slides-libs/remark-css/default.css" rel="stylesheet" />
+  <link href="/slides-libs/remark-css/default-fonts.css" rel="stylesheet" />
+  <link href="/slides-libs/panelset/panelset.css" rel="stylesheet" />
+  <link href="/slides-libs/lightable/lightable.css" rel="stylesheet" />
+  <link href="/slides-libs/slides.css" rel="stylesheet" />
+
+{{ end }}
+
+
+{{ define "body" }}
+
+    {{ $logo := .Site.Params.slide_logo.lec }}
+    {{ if not (in .Dir "lectures") }}
+      {{ $logo = .Site.Params.slide_logo.prac }}
+    {{ end }}
+    
+  {{- .Content -}}
+{{ if isset .Page.Params "slide_zero" }}
+{{ if .Page.Params.slide_zero }}
+  <div id="slide-zero-content" style="display:none;">
+class: slide-zero
+exclude: ![:live]
+count: false
+
+{{- partial "slide_zero" . -}}
+
+---
+</div>
+{{ end }} 
+{{ end }}
+
+<script type="text/javascript">
+(() => {
+  const textArea = document.querySelector("textarea");
+  const slideZeroContent = document.getElementById("slide-zero-content").innerHTML.trim();
+  textArea.innerHTML = slideZeroContent + "\n" + textArea.innerHTML.trim()
+})()
+</script>
+
+{{ $link := replaceRE "([0-9]+)$" "#$1" ( path.Dir .Page.File ) }}
+<a href="/
+{{ $link }}" id="slide-module-logo" class="logo hidden">
+  <img src="{{ print "images/" $logo | relURL }}"
+           alt="{{ .Site.Params.module_logo.alt }}">
+</a>
+<a href="{{ .Site.Params.institution_logo.target }}" id="slide-institution-logo" class="logo inst-logo hidden" target="_blank">
+  <svg>
+    <use xlink:href="{{ print "images/" .Site.Params.institution_logo.url | relURL }}#content"></use>
+  </svg>
+</a>
+        
+  {{ partial "slides_after_body" . }}
+  
+{{ end }}

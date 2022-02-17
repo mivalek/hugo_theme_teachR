@@ -1,0 +1,395 @@
+
+body {
+  user-select: none;  
+}
+
+#announcements {
+	padding: 0 1em;
+	position: relative;
+	background: rgba(var(--second-col-rgb), .8);
+	margin: 1.5em 0 0 0;
+	border-radius: 20px;
+	color: #fff;
+	line-height: 1.8em;
+	box-shadow: -4px -5px 5px var(--main-col);
+}
+
+#announcements h2, #announcements h3 {
+	color: #fff;
+}
+
+#announcements strong {
+	color: var(--main-col);
+}
+
+#announcements a {
+	color: var(--main-col);
+	border-bottom: 1px solid var(--main-col);
+}
+
+#announcements a:hover {
+	color: #fff;
+	border-color: #fff;
+}
+
+d-article {
+  overflow: hidden;
+  padding: 0 0 80px 0;
+}
+
+d-appendix {
+  display: none;
+}
+
+#week-view-container {
+	position: relative;
+}
+
+#week-view-toggle {
+	position: absolute;
+	top: 10px;
+	z-index: 2;
+}
+
+#calendar-icon {
+  height: 50px;
+  width: 40px;
+	cursor: pointer;
+	fill: var(--main-col);
+	transition: fill .2s ease-in-out;
+}
+
+#calendar-icon:hover {
+	fill: var(--second-col);
+}
+
+#week-view {
+	margin-left: 60px;
+	margin-bottom: 20px;
+	max-height: 2000px;
+	transition: all .3s ease-in;
+	overflow: hidden;
+}
+
+#week-view.collapsed {
+	max-height: 0;
+	margin-bottom: 0;
+}
+
+#week-view h3 {
+	display: flex;
+	margin: 15px 0 10px 0;
+	color: var(--main-col);
+	align-items: baseline;
+}
+
+#week-view h3 span {
+	font-size: 17px;
+	margin-left: .5em;
+	color: black;
+	font-weight: 100;
+}
+
+#week-view h3.current, #week-view h3.current span {
+	color: var(--second-col);
+}
+
+.week-links {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	row-gap: 15px;
+}
+
+.week-links a {
+	border-bottom: none;
+	margin: 0 20px;
+	font-weight: bolder;
+}
+
+.week-links a:hover {
+	border-bottom: none;
+	color: var(--second-col);
+}
+
+#teaching-break {
+	color: #8a8a8a;
+	margin: auto;
+	position: relative;
+}
+
+#teaching-break hr {
+	margin: 30px 0 10px 0;
+}
+
+#teaching-break > div {
+	position: absolute;
+	top: -15px;
+	left: 0;
+	right: 0;
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	background: var(--bg-col);
+	padding: 0 10px;
+}
+
+#main-page-tiles {
+  padding-top: 3em; 
+  position: relative;
+}
+
+.tiles {
+	display: flex;
+	flex-flow: wrap;
+	justify-content: center;
+}
+
+#main-page-tiles .tiles {
+	width: 100%;
+}
+
+.tiles.nudge {
+	transform: translateX(-71px);
+}
+
+.hexagon {
+	position: relative;
+	height: 136px;
+	width: 120px;
+	background: var(--main-col);
+	-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-moz-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-ms-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-o-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;	
+	color: var(--main-col);
+	margin: -7px 10px;
+	padding: 1px;
+}
+
+.hexagon.alt {
+	color: var(--second-col);
+	background: var(--second-col);
+}
+
+.hexagon:hover {
+	-webkit-transform: rotate(90deg) scale(1.1);
+	-moz-transform: rotate(90deg) scale(1.1);
+	-ms-transform: rotate(90deg) scale(1.1);
+	-o-transform: rotate(90deg) scale(1.1);
+	transform: rotate(90deg) scale(1.1);
+	color: #fff;	
+}
+
+.hexagon.alt:hover {
+	-webkit-transform: rotate(-90deg) scale(1.1);
+	-moz-transform: rotate(-90deg) scale(1.1);
+	-ms-transform: rotate(-90deg) scale(1.1);
+	-o-transform: rotate(-90deg) scale(1.1);
+	transform: rotate(-90deg) scale(1.1);
+	color: #fff;
+}
+
+.hexagon::before {
+	position: absolute;
+	content: '';
+	top: 3px;
+	left: 3px;
+	height: calc(100% - 6px);
+	width: calc(100% - 6px);
+	background: var(--bg-col);
+	-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-moz-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-ms-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	-o-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+	clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.hexagon:hover::before {
+	background: var(--main-col);
+}
+
+.hexagon.alt:hover::before {
+	background: var(--second-col);
+}
+
+.hexagon > p {
+	-webkit-transition: rotate 0.2s ease-in-out;
+	-moz-transition: rotate 0.2s ease-in-out;
+	-ms-transition: rotate 0.2s ease-in-out;
+	-o-transition: rotate 0.2s ease-in-out;
+	transition: rotate 0.2s ease-in-out;
+}
+
+.hexagon:hover > p {
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+
+.hexagon.alt:hover > p {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.hexagon > p {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+.tiles > .disabled {
+	background: #0006;
+	width: 90px;
+	height: max-content;
+	border-radius: 11px;
+	padding: 5px;
+	border: solid 4px #fff0;
+	text-align: center;
+}
+
+.hexagon > p > a {
+	display: block;
+	position: relative;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	line-height: 126px;
+	border: none;
+	font-size: 25px;
+	font-weight: 500;
+}
+
+.hexagon > p > a.text {
+	line-height: 136px;
+}
+
+.tiles a {
+  position: relative;  
+}
+
+.card svg {
+	height: 55%;
+	vertical-align: middle;
+	overflow: visible;
+}
+
+svg .icon {
+	fill: var(--main-col);
+	stroke: var(--main-col);
+	transform-origin: center;
+}
+
+.alt svg .icon {
+  fill: var(--second-col);
+  stroke: var(--second-col);
+}
+
+.ghost {
+	fill: var(--bg-col);
+	stroke: none;
+}
+
+.hexagon:hover svg .icon {
+	fill: var(--bg-col);
+	stroke: var(--bg-col);
+}
+
+.hexagon:hover svg .shape {
+	fill: var(--bg-col);
+	stroke: var(--main-col);
+}
+
+.hexagon:hover svg .ghost {
+	fill: var(--main-col);
+}
+
+.alt:hover svg .shape {
+	stroke: var(--second-col);
+}
+
+.alt:hover svg .ghost {
+	fill: var(--second-col);
+}
+
+@media(max-width: 405px) {
+  #teaching-break > div {
+	  top: -13px;
+  }
+  
+	.hexagon {
+		padding: 3px;
+		margin: 0.5em 1em;
+		-webkit-transform: rotate(-90deg);
+		-moz-transform: rotate(-90deg);
+		-ms-transform: rotate(-90deg);
+		-o-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+	}
+	
+	.hexagon:hover {
+		-webkit-transform: rotate(0deg) scale(1.1);
+		-moz-transform: rotate(0deg) scale(1.1);
+		-ms-transform: rotate(0deg) scale(1.1);
+		-o-transform: rotate(0deg) scale(1.1);
+		transform: rotate(0deg) scale(1.1);
+	}
+	
+	.hexagon > p {
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+	
+		
+	.hexagon.alt:hover {
+		-webkit-transform: rotate(-180deg) scale(1.1);
+		-moz-transform: rotate(-180deg) scale(1.1);
+		-ms-transform: rotate(-180deg) scale(1.1);
+		-o-transform: rotate(-180deg) scale(1.1);
+		transform: rotate(-180deg) scale(1.1);
+	}
+	
+	.hexagon:hover > p {
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	
+	.hexagon.alt:hover > p {
+		-webkit-transform: rotate(-180deg);
+		-moz-transform: rotate(-180deg);
+		-ms-transform: rotate(-180deg);
+		-o-transform: rotate(-180deg);
+		transform: rotate(-180deg);
+	}
+	.tiles.nudge {
+	  transform: none;
+	}
+}
+
+@media (min-width: 768px) {
+  #teaching-break > div {
+	  top: -17px;
+  }
+  
+  .hexagon {
+    margin: -9px 10px;
+  }
+}

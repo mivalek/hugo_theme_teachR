@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}">
+<head>
+  {{ block "head" . }}
+    {{ partial "head" . }}
+  {{ end }}
+
+  {{ block "scripts" . }}
+  {{ end }}
+  
+  {{ block "css" . }}
+    {{ partial "fonts" . }}
+  {{ end }}
+</head>
+<body>
+  {{ block "header" . }}
+    {{ partial "distill/header" . }}
+  {{ end }}
+  
+  {{ block "body" . }}
+  <!-- Add Body Here -->
+  {{ end }}
+
+  {{ block "footer" . }}
+  {{ end }}
+  <script src="/js/header.js"></script>
+  {{ partial "footer_highlightjs" . }}
+</body>
+</html>

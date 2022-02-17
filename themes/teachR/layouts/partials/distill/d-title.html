@@ -1,0 +1,15 @@
+
+<div id="paralax-div"></div>
+<d-title>
+ {{ with .Params.Subtitle}}
+ <p>{{ . }}</p>
+ {{ end }}
+ {{ if ne .Section "docs" }}
+ <p>{{ .Section | singularize | humanize }}
+ {{ if eq .Section "tutorials"}}
+ {{ replaceRE "^0" "" .File.BaseFileName }}
+ {{ else }}
+ {{ replaceRE "^0" "" ( .Dir | path.Base ) }}
+ {{ end }}</p>
+ {{ end }}
+</d-title>

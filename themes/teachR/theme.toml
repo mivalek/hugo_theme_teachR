@@ -1,0 +1,11 @@
+name = "teachR"
+license = "MIT"
+licenselink = "https://github.com/activatedgeek/distillpub/blob/master/LICENSE"
+description = "Hugo theme for course websites draws heavily on Distill theme by Sanyam Kapoor (https://www.sanyamkapoor.com)"
+homepage = "https://github.com/mivalek/teachR_hugo"
+tags = []
+features = []
+min_version = "0.55"
+
+[author]
+  name = "Milan Valášek"

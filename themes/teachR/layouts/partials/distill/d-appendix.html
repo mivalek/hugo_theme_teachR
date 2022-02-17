@@ -1,0 +1,16 @@
+<d-appendix>
+
+  {{ if .Site.Params.SourcePrefix }}
+    {{ $srcFileURL := (printf "%s/content/%s" .Site.Params.SourcePrefix .File.Dir) }}
+    <h3>Updates and Corrections</h3>
+    <p>If you see mistakes or want to suggest changes, please create issues or revisions against
+      <a target="_blank" href="{{ $srcFileURL }}">source</a>.
+    </p>
+  {{ end }}
+  
+  {{ with .Params.Distill.SupportFiles.Bibliography}}
+  {{ if fileExists ((printf "%s%s" .File.Dir .Params.Distill.SupportFiles.Bibliography)) }}
+    <d-bibliography src="{{ .RelPermalink }}{{ . }}"></d-bibliography>  
+  {{ end }}
+  {{ end }}
+</d-appendix>

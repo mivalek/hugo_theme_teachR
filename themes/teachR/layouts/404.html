@@ -1,0 +1,51 @@
+{{ define "body" }}
+
+<d-front-matter>
+  <script id='distill-front-matter' type="text/json">{
+    "title": "Hmm.{{ emojify ":expressionless:" }}",
+    "description": "Broken.",
+    "authors": []
+  }</script>
+</d-front-matter>
+
+<div id="paralax-div"></div>
+<d-title>
+<h1>There's nothing here...
+<div id="yet">yet!</div>
+</h1>
+</d-title>
+
+<d-article>
+<div class="container404">
+<div class="msg404">
+  <div id="shadow"></div>
+<div id="lolshrug"><p>¯\_(ツ)_/¯</p></div>
+<p>Either we are still working on this content (and it will appear here in due course) or you got lost.</p>
+<p>In either case, let's <a href="/">take you home</a>.</p>
+</div>
+</div>
+</d-article>
+
+
+{{ end }}
+
+{{ define "css" }}
+
+  {{ partial "css" . }}
+  
+  <link rel="stylesheet" href="/css/404.css">
+{{ end }}
+
+
+{{ define "scripts" }}
+ 
+   {{ partial "scripts" . }}
+
+{{ end }}
+
+
+
+{{ define "footer" }}
+
+  {{ partial "distill/footer" . }}
+{{ end }}

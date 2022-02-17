@@ -1,0 +1,6 @@
+<svg id="content" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 269.29 226.77">
+    <g id="Layer_2" data-name="Layer 2">
+        <path style="fill:var(--second-col);" d="M139,225.75a5.27,5.27,0,0,1-6.19,0c-26.41-18.72-81.68-62-102.64-84C-53.76,53.69,55.85-53.57,135.88,30.45c77.41-81.27,185.2,28.24,105.23,112.21C216.73,168.26,176.79,198.29,139,225.75Z"/>
+        <text style="font-size:73.81px;fill:var(--thanks-col);font-family:Candara-Bold, Candara;font-weight:700;" transform="translate(41.39 99.23) scale(0.96 1)">Thank <tspan x="29.03" y="56.62">you!</tspan></text>
+    </g>
+</svg>

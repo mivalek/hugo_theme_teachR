@@ -1,0 +1,67 @@
+<d-header class="header">
+  <nav class="nav">
+    <div class="nav-left">
+      <div>
+        <a href="{{ "/" | relURL }}" class="nav-logo" aria-label="{{ .Site.Params.module_logo.alt }}">
+          <img src="{{ print "images/" .Site.Params.module_logo.url | relURL }}"
+            width="{{ .Site.Params.module_logo.width }}" height="{{ .Site.Params.module_logo.height }}"
+            alt="{{ .Site.Params.module_logo.alt }}">
+        </a>
+        <a href="{{ .Site.Params.vle_logo.target }}" class="nav-logo" target="_blank"
+          title="{{ .Site.Params.vle_logo.title }}">
+          <img src="{{ print "images/" .Site.Params.vle_logo.url | relURL }}" width="{{ .Site.Params.vle_logo.width }}"
+            height="{{ .Site.Params.vle_logo.height }}" alt="{{ .Site.Params.vle_logo.alt }}">
+        </a>
+      </div>
+      <button id="menu-icon">
+        <img src="/images/hamburger_icon.svg" alt="Menu">
+      </button>
+    </div>
+    <div class="nav-right">
+      {{- range .Site.Menus.main -}}
+      <div class="nav-dropdown">
+        <button class="nav-dropbtn">{{ .Identifier }}<span class="down-arrow">▾</span></button>
+        <div id="{{ lower .Identifier }}-menu" class="nav-dropdown-content">
+          {{ if .HasChildren }}
+          {{ range .Children }}
+          <a href="{{ .URL }}">{{ .Identifier }}</a>
+          {{ end }}
+          {{ else }}
+          {{ $ident := replace (.Identifier | lower) " " "_" }}
+          {{ range where $.Site.Sections ".Name" .Identifier}}
+          {{ $path := printf "/content/%s" .File.Dir}}
+          {{ if or (eq $ident "tutorials") (eq $ident "practicals") }}
+            {{ range $section := sort ( where $.Site.RegularPages "Section" ( $ident )) ".File.BaseFileName" }}
+              {{ $published := true}}
+              {{ if isset $section.Page.Params "publish" }}
+                {{ $published = $section.Page.Params.publish }}
+              {{ end }}
+              {{ $noSol := false}}
+              {{ if isset $section.Page.Params "no_solution" }}
+                {{ $noSol = $section.Page.Params.no_solution }}
+              {{ end }}
+          <a {{ if $published }}href="/{{ $ident  }}/{{ .File.BaseFileName }}" {{ if $noSol }}class="no-solution"{{ end }}{{ else }}class="disabled" alt="{{ $ident | singularize}} not available" title="not available"{{ end }}>{{ $ident | singularize | humanize }}
+            {{ replaceRE "^0" "" .File.BaseFileName }}</a>
+          {{ end }}
+          {{ else }}
+          {{ range (readDir $path) }}
+          {{- if .IsDir }}
+          <a href="/{{ $ident }}/#{{ .Name }}">{{ $ident | singularize | humanize }} {{ replaceRE "^0" "" .Name }}</a>
+          {{ end }}
+          {{ end }}
+          {{ end }}
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+      {{- end -}}
+    <a href="{{ "/about" | relURL }}">About</a>
+    <div id="dark-container">
+      <div id="dark-toggle" title="toggle light/dark theme" alt="toggle light and dark theme">
+        <div id="moon"></div>
+        <div id="sun"></div>
+      </div>
+    </div>
+  </div>
+</nav>
+</d-header>

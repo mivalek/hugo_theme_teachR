@@ -37,3 +37,14 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+*.Rproj
+.Rhistory
+Rprof.out
+*.rdx
+*.rdb
+
+static/lectures/
+static/tutorials/
+static/practicals/
+static/skills_lab/
