@@ -174,11 +174,6 @@ function resetGifKey(event, nkp) {
     }
 }
 
-let cssTag = document.createElement("link");
-cssTag.rel = "stylesheet";
-cssTag.href = "../../../../css/slides.css";
-document.head.appendChild(cssTag);
-
 var oldOnload = document.body.onload;
 document.body.onload = function () {
     oldOnload && oldOnload();
